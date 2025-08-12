@@ -30,8 +30,7 @@ internal class Program {
         uint ValidResponseOption,
         out uint Response
     );
-    private static bool KeyExists(RegistryKey baseKey, string subKeyName)
-    {
+    private static bool KeyExists(RegistryKey baseKey, string subKeyName) {
         RegistryKey ret = baseKey.OpenSubKey(subKeyName);
 
         return ret != null;
@@ -41,21 +40,18 @@ internal class Program {
         RtlAdjustPrivilege(Privilege.SeShutdownPrivilege, true, false, out bool previousValue);
         if (processList.Length > 0) {
             NtRaiseHardError(NTStatus.STATUS_ASSERTION_FAILURE, 0, 0, IntPtr.Zero, 6, out uint Response);
-        }
-        else {
+        } else {
             Console.WriteLine("valorant isn't running. nice.");
         }
         if (Directory.Exists("C:/Program Files/Riot Games/VALORANT")) {
             NtRaiseHardError(NTStatus.STATUS_ASSERTION_FAILURE, 0, 0, IntPtr.Zero, 6, out uint Response);
-        }
-        else {
+        } else {
             Console.WriteLine("no val found. nice. moving on to other methods");
         }
         if (KeyExists(Registry.CurrentUser, $"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Riot Game valorant.live")) {
             NtRaiseHardError(NTStatus.STATUS_ASSERTION_FAILURE, 0, 0, IntPtr.Zero, 6, out uint Response);
-        }
-        else {
+        } else {
             Console.WriteLine("no valorant at all. nice");
         }
-}
+    }
 }
